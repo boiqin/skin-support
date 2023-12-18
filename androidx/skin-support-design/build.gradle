@@ -31,19 +31,8 @@ dependencies {
 ext {
     publishVersion = rootProject.skinAndroidXVersion
     publishGroup = rootProject.skinAndroidXSkinGroup
-    moduleName = 'skin-support-design'
+    moduleName = 'skin-support-material'
     descContent = 'material design控件换肤支持包'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.littlefogcat'
-                artifactId = 'skin-support-material'
-                version = rootProject.skinAndroidXVersion
-            }
-        }
-    }
-}
+apply from: '../../publishing_maven.gradle'

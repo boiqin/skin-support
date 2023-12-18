@@ -34,15 +34,4 @@ ext {
     descContent = "CardView-v7 换肤支持包"
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.littlefogcat'
-                artifactId = 'skin-support-cardview'
-                version = rootProject.skinAndroidXVersion
-            }
-        }
-    }
-}
+apply from: '../../publishing_maven.gradle'
