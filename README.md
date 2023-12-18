@@ -8,19 +8,15 @@
 
 **导入方式**
 
-1. 在根 `build.gradle` 中加入 JitPack 的依赖：
-```gradle
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-```
-2. 在模块 `build.gradle` 中加入依赖：
+在模块 `build.gradle` 中加入依赖：
+
 ```gradle
 	dependencies {
-	        implementation 'com.github.littlefogcat:skin-support:4.0.7'
+	        implementation 'io.github.boiqin:skin-support:4.0.8'
+	        implementation 'io.github.boiqin:skin-support-appcompat:4.0.8'
+	        implementation 'io.github.boiqin:skin-support-material:4.0.8'
+	        implementation 'io.github.boiqin:skin-support-cardview:4.0.8'
+	        implementation 'io.github.boiqin:skin-support-constraintlayout:4.0.8'
 	}
 ```
 
