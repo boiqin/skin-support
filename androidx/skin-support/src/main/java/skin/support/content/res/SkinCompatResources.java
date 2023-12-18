@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -97,14 +96,26 @@ public class SkinCompatResources {
         return getColor(SkinCompatManager.getInstance().getContext(), resId);
     }
 
+    public static int getColor(Context context, int resId) {
+        return getInstance().getSkinColor(context, resId);
+    }
+
     @Deprecated
     public Drawable getDrawable(int resId) {
         return getDrawable(SkinCompatManager.getInstance().getContext(), resId);
     }
 
+    public static Drawable getDrawable(Context context, int resId) {
+        return getInstance().getSkinDrawable(context, resId);
+    }
+
     @Deprecated
     public ColorStateList getColorStateList(int resId) {
         return getColorStateList(SkinCompatManager.getInstance().getContext(), resId);
+    }
+
+    public static ColorStateList getColorStateList(Context context, int resId) {
+        return getInstance().getSkinColorStateList(context, resId);
     }
 
     public int getTargetResId(Context context, int resId) {
@@ -231,18 +242,6 @@ public class SkinCompatResources {
             }
         }
         context.getResources().getValue(resId, outValue, resolveRefs);
-    }
-
-    public static int getColor(Context context, int resId) {
-        return getInstance().getSkinColor(context, resId);
-    }
-
-    public static ColorStateList getColorStateList(Context context, int resId) {
-        return getInstance().getSkinColorStateList(context, resId);
-    }
-
-    public static Drawable getDrawable(Context context, int resId) {
-        return getInstance().getSkinDrawable(context, resId);
     }
 
     public static XmlResourceParser getXml(Context context, int resId) {

@@ -73,17 +73,17 @@ public class SkinCompatProgressBarHelper extends SkinCompatHelper {
             }
         } else if (drawable instanceof LayerDrawable) {
             LayerDrawable background = (LayerDrawable) drawable;
-            final int N = background.getNumberOfLayers();
-            Drawable[] outDrawables = new Drawable[N];
+            final int layersNumber = background.getNumberOfLayers();
+            Drawable[] outDrawables = new Drawable[layersNumber];
 
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < layersNumber; i++) {
                 int id = background.getId(i);
                 outDrawables[i] = tileify(background.getDrawable(i),
                         (id == android.R.id.progress || id == android.R.id.secondaryProgress));
             }
             LayerDrawable newBg = new LayerDrawable(outDrawables);
 
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < layersNumber; i++) {
                 newBg.setId(i, background.getId(i));
             }
 
@@ -116,11 +116,11 @@ public class SkinCompatProgressBarHelper extends SkinCompatHelper {
     private Drawable tileifyIndeterminate(Drawable drawable) {
         if (drawable instanceof AnimationDrawable) {
             AnimationDrawable background = (AnimationDrawable) drawable;
-            final int N = background.getNumberOfFrames();
+            final int framesNumber = background.getNumberOfFrames();
             AnimationDrawable newBg = new AnimationDrawable();
             newBg.setOneShot(background.isOneShot());
 
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < framesNumber; i++) {
                 Drawable frame = tileify(background.getFrame(i), true);
                 frame.setLevel(10000);
                 newBg.addFrame(frame, background.getDuration(i));

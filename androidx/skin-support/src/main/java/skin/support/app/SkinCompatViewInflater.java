@@ -24,11 +24,11 @@ import skin.support.view.ViewCompat;
  */
 
 public class SkinCompatViewInflater {
-    private static final Class<?>[] sConstructorSignature = new Class[]{
+    private static final Class<?>[] CONSTRUCTOR_SIGNATURE = new Class[]{
             Context.class, AttributeSet.class};
-    private static final int[] sOnClickAttrs = new int[]{android.R.attr.onClick};
+    private static final int[] ONCLICK_ATTRS = new int[]{android.R.attr.onClick};
 
-    private static final String[] sClassPrefixList = {
+    private static final String[] CLASS_PREFIX_LIST = {
             "android.widget.",
             "android.view.",
             "android.webkit."
@@ -94,8 +94,8 @@ public class SkinCompatViewInflater {
             mConstructorArgs[1] = attrs;
 
             if (-1 == name.indexOf('.')) {
-                for (int i = 0; i < sClassPrefixList.length; i++) {
-                    final View view = createView(context, name, sClassPrefixList[i]);
+                for (int i = 0; i < CLASS_PREFIX_LIST.length; i++) {
+                    final View view = createView(context, name, CLASS_PREFIX_LIST[i]);
                     if (view != null) {
                         return view;
                     }
@@ -131,7 +131,7 @@ public class SkinCompatViewInflater {
             return;
         }
 
-        final TypedArray a = context.obtainStyledAttributes(attrs, sOnClickAttrs);
+        final TypedArray a = context.obtainStyledAttributes(attrs, ONCLICK_ATTRS);
         final String handlerName = a.getString(0);
         if (handlerName != null) {
             view.setOnClickListener(new DeclaredOnClickListener(view, handlerName));
@@ -149,7 +149,7 @@ public class SkinCompatViewInflater {
                 Class<? extends View> clazz = context.getClassLoader().loadClass(
                         prefix != null ? (prefix + name) : name).asSubclass(View.class);
 
-                constructor = clazz.getConstructor(sConstructorSignature);
+                constructor = clazz.getConstructor(CONSTRUCTOR_SIGNATURE);
                 sConstructorMap.put(name, constructor);
             }
             constructor.setAccessible(true);

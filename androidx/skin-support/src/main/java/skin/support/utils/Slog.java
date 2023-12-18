@@ -3,7 +3,7 @@ package skin.support.utils;
 import android.util.Log;
 
 public class Slog {
-    public static boolean DEBUG = false;
+    public static final boolean DEBUG = false;
     private static final String TAG = "skin-support";
 
     public static void i(String msg) {

@@ -1,5 +1,8 @@
 package skin.support.content.res;
 
+import static skin.support.content.res.ColorState.checkColorValid;
+import static skin.support.content.res.ColorState.toJSONObject;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -25,9 +28,6 @@ import skin.support.utils.ImageUtils;
 import skin.support.utils.SkinPreference;
 import skin.support.utils.Slog;
 
-import static skin.support.content.res.ColorState.checkColorValid;
-import static skin.support.content.res.ColorState.toJSONObject;
-
 public class SkinCompatUserThemeManager {
     private static final String TAG = "SkinCompatUserThemeManager";
     private static final String KEY_TYPE = "type";
@@ -36,7 +36,7 @@ public class SkinCompatUserThemeManager {
     private static final String KEY_DRAWABLE_NAME = "drawableName";
     private static final String KEY_DRAWABLE_PATH_AND_ANGLE = "drawablePathAndAngle";
 
-    private static SkinCompatUserThemeManager INSTANCE = new SkinCompatUserThemeManager();
+    private static final SkinCompatUserThemeManager INSTANCE = new SkinCompatUserThemeManager();
 
     private final HashMap<String, ColorState> mColorNameStateMap = new HashMap<>();
     private final Object mColorCacheLock = new Object();

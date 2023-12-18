@@ -4,10 +4,11 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.RequiresApi;
 
 import skin.support.R;
 import skin.support.content.res.SkinCompatVectorResources;
@@ -56,8 +57,12 @@ public class SkinCompatTextHelperV17 extends SkinCompatTextHelper {
 
     @Override
     protected void applyCompoundDrawablesRelativeResource() {
-        Drawable drawableLeft = null, drawableTop = null, drawableRight = null, drawableBottom = null,
-                drawableStart = null, drawableEnd = null;
+        Drawable drawableLeft = null;
+        Drawable drawableTop = null;
+        Drawable drawableRight = null;
+        Drawable drawableBottom = null;
+        Drawable drawableStart = null;
+        Drawable drawableEnd = null;
         mDrawableLeftResId = checkResourceId(mDrawableLeftResId);
         if (mDrawableLeftResId != INVALID_ID) {
             drawableLeft = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mDrawableLeftResId);

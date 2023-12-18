@@ -1,5 +1,10 @@
 package skin.support.content.res;
 
+import static androidx.core.graphics.ColorUtils.compositeColors;
+import static skin.support.content.res.SkinCompatThemeUtils.getDisabledThemeAttrColor;
+import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColor;
+import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColorStateList;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,36 +17,30 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Drawable.ConstantState;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.collection.ArrayMap;
-import androidx.collection.LongSparseArray;
-import androidx.collection.LruCache;
-import androidx.appcompat.R;
-
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.util.Xml;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.R;
+import androidx.collection.ArrayMap;
+import androidx.collection.LongSparseArray;
+import androidx.collection.LruCache;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
-
-import static androidx.core.graphics.ColorUtils.compositeColors;
-import static skin.support.content.res.SkinCompatThemeUtils.getDisabledThemeAttrColor;
-import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColor;
-import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColorStateList;
 
 final class SkinCompatDrawableManager {
     private interface InflateDelegate {
@@ -56,14 +55,14 @@ final class SkinCompatDrawableManager {
 
     private static final String PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable";
 
-    private static SkinCompatDrawableManager INSTANCE;
+    private static SkinCompatDrawableManager sInstance;
 
     public static SkinCompatDrawableManager get() {
-        if (INSTANCE == null) {
-            INSTANCE = new SkinCompatDrawableManager();
-            installDefaultInflateDelegates(INSTANCE);
+        if (sInstance == null) {
+            sInstance = new SkinCompatDrawableManager();
+            installDefaultInflateDelegates(sInstance);
         }
-        return INSTANCE;
+        return sInstance;
     }
 
     private static void installDefaultInflateDelegates(@NonNull SkinCompatDrawableManager manager) {

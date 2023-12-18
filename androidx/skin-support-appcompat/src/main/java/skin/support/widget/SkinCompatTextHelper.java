@@ -5,9 +5,10 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
 
 import skin.support.R;
 import skin.support.content.res.SkinCompatResources;
@@ -148,7 +149,10 @@ public class SkinCompatTextHelper extends SkinCompatHelper {
     }
 
     protected void applyCompoundDrawablesResource() {
-        Drawable drawableLeft = null, drawableTop = null, drawableRight = null, drawableBottom = null;
+        Drawable drawableLeft = null;
+        Drawable drawableTop = null;
+        Drawable drawableRight = null;
+        Drawable drawableBottom = null;
         mDrawableLeftResId = checkResourceId(mDrawableLeftResId);
         if (mDrawableLeftResId != INVALID_ID) {
             drawableLeft = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mDrawableLeftResId);

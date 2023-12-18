@@ -1,5 +1,7 @@
 package skin.support.content.res;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -7,8 +9,6 @@ import android.graphics.Color;
 import android.util.TypedValue;
 
 import skin.support.graphics.ColorUtils;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * Created by ximsfei on 2017/3/25.
@@ -65,6 +65,12 @@ public class SkinCompatThemeUtils {
         }
     }
 
+    static int getThemeAttrColor(Context context, int attr, float alpha) {
+        final int color = getThemeAttrColor(context, attr);
+        final int originalAlpha = Color.alpha(color);
+        return ColorUtils.setAlphaComponent(color, Math.round(originalAlpha * alpha));
+    }
+
     public static ColorStateList getThemeAttrColorStateList(Context context, int attr) {
         TEMP_ARRAY[0] = attr;
         TypedArray a = context.obtainStyledAttributes(null, TEMP_ARRAY);
@@ -103,11 +109,5 @@ public class SkinCompatThemeUtils {
             TL_TYPED_VALUE.set(typedValue);
         }
         return typedValue;
-    }
-
-    static int getThemeAttrColor(Context context, int attr, float alpha) {
-        final int color = getThemeAttrColor(context, attr);
-        final int originalAlpha = Color.alpha(color);
-        return ColorUtils.setAlphaComponent(color, Math.round(originalAlpha * alpha));
     }
 }
