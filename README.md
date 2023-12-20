@@ -12,11 +12,11 @@
 
 ```gradle
 	dependencies {
-	        implementation 'io.github.boiqin:skin-support:4.0.8'
-	        implementation 'io.github.boiqin:skin-support-appcompat:4.0.8'
-	        implementation 'io.github.boiqin:skin-support-material:4.0.8'
-	        implementation 'io.github.boiqin:skin-support-cardview:4.0.8'
-	        implementation 'io.github.boiqin:skin-support-constraintlayout:4.0.8'
+	        implementation 'io.github.boiqin:skin-support:4.0.10'
+	        implementation 'io.github.boiqin:skin-support-appcompat:4.0.10'
+	        implementation 'io.github.boiqin:skin-support-material:4.0.10'
+	        implementation 'io.github.boiqin:skin-support-cardview:4.0.10'
+	        implementation 'io.github.boiqin:skin-support-constraintlayout:4.0.10'
 	}
 ```
 

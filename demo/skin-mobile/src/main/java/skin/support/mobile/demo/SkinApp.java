@@ -9,13 +9,12 @@ import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
-import skin.support.utils.Slog;
 
 public class SkinApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Slog.DEBUG = BuildConfig.DEBUG;
+        // Slog.DEBUG = BuildConfig.DEBUG;
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         SkinCompatManager.withoutActivity(this)
 //                .addStrategy(new CustomSDCardLoader())          // 自定义加载策略，指定SDCard路径

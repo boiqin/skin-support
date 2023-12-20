@@ -1,8 +1,8 @@
 package skin.support.content.res;
 
-import android.content.Context;
-
 import static skin.support.content.res.SkinCompatThemeUtils.getResId;
+
+import android.content.Context;
 
 /**
  * Created by ximsfei on 2017/3/25.
@@ -30,5 +30,8 @@ public class SkinCompatV7ThemeUtils {
 
     public static int getColorAccentResId(Context context) {
         return getResId(context, APPCOMPAT_COLOR_ACCENT_ATTRS);
+    }
+
+    private SkinCompatV7ThemeUtils() {
     }
 }

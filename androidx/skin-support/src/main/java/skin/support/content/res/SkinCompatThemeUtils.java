@@ -110,4 +110,7 @@ public class SkinCompatThemeUtils {
         }
         return typedValue;
     }
+
+    private SkinCompatThemeUtils() {
+    }
 }

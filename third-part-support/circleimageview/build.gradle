@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
@@ -20,8 +20,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation project(':androidx:skin-support')
-    implementation project(':androidx:skin-support-appcompat')
+//    implementation project(':androidx:skin-support')
+//    implementation project(':androidx:skin-support-appcompat')
+    // skin-support
+    implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
+    // skin-support 基础控件支持
+    implementation "io.github.boiqin:skin-support-appcompat:$skinAndroidXVersion"
 }
 
 ext {
