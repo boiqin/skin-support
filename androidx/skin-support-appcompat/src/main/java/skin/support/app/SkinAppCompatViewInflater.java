@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-
-import androidx.core.view.ViewCompat;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.TintContextWrapper;
-import androidx.appcompat.widget.VectorEnabledTintResources;
-
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewParent;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.TintContextWrapper;
+import androidx.appcompat.widget.VectorEnabledTintResources;
+import androidx.core.view.ViewCompat;
 
 import skin.support.appcompat.R;
 import skin.support.content.res.SkinCompatVectorResources;
@@ -48,7 +48,7 @@ public class SkinAppCompatViewInflater implements SkinLayoutInflater, SkinWrappe
     }
 
     @Override
-    public View createView(Context context, String name, AttributeSet attrs) {
+    public View createView(@NonNull Context context, String name, @NonNull AttributeSet attrs) {
         View view = createViewFromFV(context, name, attrs);
 
         if (view == null) {

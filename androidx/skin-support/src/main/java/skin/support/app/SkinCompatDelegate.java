@@ -5,12 +5,13 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import skin.support.SkinCompatManager;
-import skin.support.annotation.NonNull;
 import skin.support.widget.SkinCompatSupportable;
 
 /**
@@ -20,14 +21,14 @@ import skin.support.widget.SkinCompatSupportable;
 public class SkinCompatDelegate implements LayoutInflater.Factory2 {
     private final Context mContext;
     private SkinCompatViewInflater mSkinCompatViewInflater;
-    private List<WeakReference<SkinCompatSupportable>> mSkinHelpers = new CopyOnWriteArrayList<>();
+    private final List<WeakReference<SkinCompatSupportable>> mSkinHelpers = new CopyOnWriteArrayList<>();
 
     private SkinCompatDelegate(Context context) {
         mContext = context;
     }
 
     @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+    public View onCreateView(View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         View view = createView(parent, name, context, attrs);
 
         if (view == null) {
@@ -41,7 +42,7 @@ public class SkinCompatDelegate implements LayoutInflater.Factory2 {
     }
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         View view = createView(null, name, context, attrs);
 
         if (view == null) {
@@ -75,10 +76,10 @@ public class SkinCompatDelegate implements LayoutInflater.Factory2 {
     }
 
     public void applySkin() {
-        if (mSkinHelpers != null && !mSkinHelpers.isEmpty()) {
-            for (WeakReference ref : mSkinHelpers) {
+        if (!mSkinHelpers.isEmpty()) {
+            for (WeakReference<SkinCompatSupportable> ref : mSkinHelpers) {
                 if (ref != null && ref.get() != null) {
-                    ((SkinCompatSupportable) ref.get()).applySkin();
+                    ref.get().applySkin();
                 }
             }
         }

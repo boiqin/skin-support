@@ -11,21 +11,22 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import skin.support.annotation.NonNull;
-import skin.support.annotation.Nullable;
 import skin.support.app.SkinActivityLifecycle;
 import skin.support.app.SkinLayoutInflater;
 import skin.support.app.SkinWrapper;
+import skin.support.content.res.SkinCompatResources;
 import skin.support.load.SkinAssetsLoader;
 import skin.support.load.SkinBuildInLoader;
 import skin.support.load.SkinNoneLoader;
 import skin.support.load.SkinPrefixBuildInLoader;
 import skin.support.observe.SkinObservable;
 import skin.support.utils.SkinPreference;
-import skin.support.content.res.SkinCompatResources;
 
 public class SkinCompatManager extends SkinObservable {
     public static final int SKIN_LOADER_STRATEGY_NONE = -1;
@@ -36,10 +37,10 @@ public class SkinCompatManager extends SkinObservable {
     private final Object mLock = new Object();
     private final Context mAppContext;
     private boolean mLoading = false;
-    private List<SkinWrapper> mWrappers = new ArrayList<>();
-    private List<SkinLayoutInflater> mInflaters = new ArrayList<>();
-    private List<SkinLayoutInflater> mHookInflaters = new ArrayList<>();
-    private SparseArray<SkinLoaderStrategy> mStrategyMap = new SparseArray<>();
+    private final List<SkinWrapper> mWrappers = new ArrayList<>();
+    private final List<SkinLayoutInflater> mInflaters = new ArrayList<>();
+    private final List<SkinLayoutInflater> mHookInflaters = new ArrayList<>();
+    private final SparseArray<SkinLoaderStrategy> mStrategyMap = new SparseArray<>();
     private boolean mSkinAllActivityEnable = true;
     private boolean mSkinStatusBarColorEnable = false;
     private boolean mSkinWindowBackgroundColorEnable = true;
@@ -441,7 +442,7 @@ public class SkinCompatManager extends SkinObservable {
      * 获取皮肤包资源{@link Resources}.
      *
      * @param skinPkgPath sdcard中皮肤包路径.
-     * @return
+     * @return Resources
      */
     @Nullable
     public Resources getSkinResources(String skinPkgPath) {

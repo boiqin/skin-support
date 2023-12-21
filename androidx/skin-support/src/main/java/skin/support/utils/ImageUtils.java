@@ -1,6 +1,6 @@
 package skin.support.utils;
 
-import android.media.ExifInterface;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.IOException;
 
@@ -28,7 +28,6 @@ public class ImageUtils {
                     angle = 270;
                     break;
                 default:
-                    angle = 0;
                     break;
             }
         }

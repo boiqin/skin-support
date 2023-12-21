@@ -12,6 +12,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,8 +25,6 @@ import java.util.HashMap;
 import java.util.WeakHashMap;
 
 import skin.support.SkinCompatManager;
-import skin.support.annotation.ColorRes;
-import skin.support.annotation.DrawableRes;
 import skin.support.utils.ImageUtils;
 import skin.support.utils.SkinPreference;
 import skin.support.utils.Slog;

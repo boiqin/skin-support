@@ -10,33 +10,30 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.TypedValue;
 
+import androidx.annotation.AnyRes;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import skin.support.SkinCompatManager;
-import skin.support.annotation.AnyRes;
 
 public class SkinCompatResources {
-    private static volatile SkinCompatResources sInstance;
     private Resources mResources;
     private String mSkinPkgName = "";
     private String mSkinName = "";
     private SkinCompatManager.SkinLoaderStrategy mStrategy;
     private boolean isDefaultSkin = true;
-    private List<SkinResources> mSkinResources = new ArrayList<>();
+    private final List<SkinResources> mSkinResources = new ArrayList<>();
 
     private SkinCompatResources() {
     }
 
+    private static final class InstanceHolder {
+        static final SkinCompatResources INSTANCE = new SkinCompatResources();
+    }
+
     public static SkinCompatResources getInstance() {
-        if (sInstance == null) {
-            synchronized (SkinCompatResources.class) {
-                if (sInstance == null) {
-                    sInstance = new SkinCompatResources();
-                }
-            }
-        }
-        return sInstance;
+        return InstanceHolder.INSTANCE;
     }
 
     void addSkinResources(SkinResources resources) {

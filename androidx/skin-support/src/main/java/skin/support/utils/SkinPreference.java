@@ -15,7 +15,7 @@ public class SkinPreference {
     private static final String KEY_SKIN_NAME = "skin-name";
     private static final String KEY_SKIN_STRATEGY = "skin-strategy";
     private static final String KEY_SKIN_USER_THEME = "skin-user-theme-json";
-    private static SkinPreference sInstance;
+    private static volatile SkinPreference sInstance;
     private final Context mApp;
     private final SharedPreferences mPref;
     private final SharedPreferences.Editor mEditor;

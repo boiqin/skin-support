@@ -8,16 +8,17 @@ import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
+import androidx.core.view.ViewCompat;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 import skin.support.SkinCompatManager;
-import skin.support.annotation.NonNull;
-import skin.support.annotation.Nullable;
-import skin.support.collection.ArrayMap;
-import skin.support.view.ViewCompat;
 
 /**
  * Created by ximsfei on 17-1-9.
@@ -94,8 +95,8 @@ public class SkinCompatViewInflater {
             mConstructorArgs[1] = attrs;
 
             if (-1 == name.indexOf('.')) {
-                for (int i = 0; i < CLASS_PREFIX_LIST.length; i++) {
-                    final View view = createView(context, name, CLASS_PREFIX_LIST[i]);
+                for (String classPrefix : CLASS_PREFIX_LIST) {
+                    final View view = createView(context, name, classPrefix);
                     if (view != null) {
                         return view;
                     }
