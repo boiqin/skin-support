@@ -63,10 +63,8 @@ public class SkinCompatViewInflater {
         View view = null;
         for (SkinLayoutInflater inflater : SkinCompatManager.getInstance().getHookInflaters()) {
             view = inflater.createView(context, name, attrs);
-            if (view == null) {
-                continue;
-            } else {
-                break;
+            if (view != null) {
+                return view;
             }
         }
         return view;
@@ -76,10 +74,8 @@ public class SkinCompatViewInflater {
         View view = null;
         for (SkinLayoutInflater inflater : SkinCompatManager.getInstance().getInflaters()) {
             view = inflater.createView(context, name, attrs);
-            if (view == null) {
-                continue;
-            } else {
-                break;
+            if (view != null) {
+                return view;
             }
         }
         return view;

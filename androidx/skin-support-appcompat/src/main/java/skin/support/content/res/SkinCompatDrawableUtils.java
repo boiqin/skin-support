@@ -7,6 +7,7 @@ import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 
 import skin.support.utils.SkinCompatVersionUtils;
@@ -77,7 +78,7 @@ class SkinCompatDrawableUtils {
      */
     private static void fixVectorDrawableTinting(final Drawable drawable) {
         final int[] originalState = drawable.getState();
-        if (originalState == null || originalState.length == 0) {
+        if (originalState.length == 0) {
             // The drawable doesn't have a state, so set it to be checked
             drawable.setState(SkinCompatThemeUtils.CHECKED_STATE_SET);
         } else {

@@ -11,12 +11,8 @@ public class SkinConstraintViewInflater implements SkinLayoutInflater {
     @Override
     public View createView(Context context, final String name, AttributeSet attrs) {
         View view = null;
-        switch (name) {
-            case "androidx.constraintlayout.widget.ConstraintLayout":
-                view = new SkinCompatConstraintLayout(context, attrs);
-                break;
-            default:
-                break;
+        if (name.equals("androidx.constraintlayout.widget.ConstraintLayout")) {
+            view = new SkinCompatConstraintLayout(context, attrs);
         }
         return view;
     }

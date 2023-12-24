@@ -4,25 +4,22 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 
 public class SkinCompatVectorResources implements SkinResources {
-    private static SkinCompatVectorResources sInstance;
 
     private SkinCompatVectorResources() {
         SkinCompatResources.getInstance().addSkinResources(this);
     }
 
+    private static final class InstanceHolder {
+        static final SkinCompatVectorResources INSTANCE = new SkinCompatVectorResources();
+    }
+
     public static SkinCompatVectorResources getInstance() {
-        if (sInstance == null) {
-            synchronized (SkinCompatVectorResources.class) {
-                if (sInstance == null) {
-                    sInstance = new SkinCompatVectorResources();
-                }
-            }
-        }
-        return sInstance;
+        return InstanceHolder.INSTANCE;
     }
 
     @Override
@@ -57,7 +54,6 @@ public class SkinCompatVectorResources implements SkinResources {
             if (drawable != null) {
                 return drawable;
             }
-            return AppCompatResources.getDrawable(context, resId);
         } else {
             if (!SkinCompatUserThemeManager.get().isColorEmpty()) {
                 ColorStateList colorStateList = SkinCompatUserThemeManager.get().getColorStateList(resId);
@@ -81,8 +77,8 @@ public class SkinCompatVectorResources implements SkinResources {
                     return SkinCompatResources.getInstance().getSkinResources().getDrawable(targetResId);
                 }
             }
-            return AppCompatResources.getDrawable(context, resId);
         }
+        return AppCompatResources.getDrawable(context, resId);
     }
 
     public static Drawable getDrawableCompat(Context context, int resId) {
