@@ -23,10 +23,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
-    // implementation project(':androidx:skin-support')
-    // implementation project(':androidx:skin-support-appcompat')
-    implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
-    implementation "io.github.boiqin:skin-support-appcompat:$skinAndroidXVersion"
+    if (isUseLocal) {
+        implementation project(':androidx:skin-support')
+        implementation project(':androidx:skin-support-appcompat')
+    } else {
+        implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
+        implementation "io.github.boiqin:skin-support-appcompat:$skinAndroidXVersion"
+    }
 }
 
 ext {

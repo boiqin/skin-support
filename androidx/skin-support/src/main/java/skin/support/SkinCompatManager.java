@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
@@ -20,6 +19,7 @@ import java.util.List;
 import skin.support.app.SkinActivityLifecycle;
 import skin.support.app.SkinLayoutInflater;
 import skin.support.app.SkinWrapper;
+import skin.support.async.AsyncTask;
 import skin.support.content.res.SkinCompatResources;
 import skin.support.load.SkinAssetsLoader;
 import skin.support.load.SkinBuildInLoader;
@@ -357,7 +357,7 @@ public class SkinCompatManager extends SkinObservable {
         if (loaderStrategy == null) {
             return null;
         }
-        return new SkinLoadTask(listener, loaderStrategy).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, skinName);
+        return new SkinLoadTask(listener, loaderStrategy).execute(skinName);
     }
 
     private class SkinLoadTask extends AsyncTask<String, Void, String> {
@@ -377,7 +377,7 @@ public class SkinCompatManager extends SkinObservable {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String skin) throws Exception {
             synchronized (mLock) {
                 while (mLoading) {
                     try {
@@ -389,14 +389,13 @@ public class SkinCompatManager extends SkinObservable {
                 mLoading = true;
             }
             try {
-                if (params.length == 1) {
-                    String skinName = mStrategy.loadSkinInBackground(mAppContext, params[0]);
-                    if (TextUtils.isEmpty(skinName)) {
-                        SkinCompatResources.getInstance().reset(mStrategy);
-                        return "";
-                    }
-                    return params[0];
+                String skinName = mStrategy.loadSkinInBackground(mAppContext, skin);
+                if (TextUtils.isEmpty(skinName)) {
+                    SkinCompatResources.getInstance().reset(mStrategy);
+                    return "";
                 }
+                return skin;
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -423,6 +422,11 @@ public class SkinCompatManager extends SkinObservable {
                 mLoading = false;
                 mLock.notifyAll();
             }
+        }
+
+        @Override
+        protected void onBackgroundError(Exception e) {
+
         }
     }
 

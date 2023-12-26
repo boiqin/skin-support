@@ -24,8 +24,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.cardview:cardview:$cardViewVersion"
-    // implementation project(':androidx:skin-support')
-    implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
+    if (isUseLocal) {
+        implementation project(':androidx:skin-support')
+    } else {
+        implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
+    }
 }
 
 ext {

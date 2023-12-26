@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "skin.support.mobile.demo"
@@ -10,8 +9,6 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-
-
         buildConfigField("String", "BUILD_TIME", "\"" + new Date().format("yyyy-MM-dd") + "\"")
     }
 
@@ -45,13 +42,22 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
     implementation "com.google.android.material:material:$materialVersion"
 
-//    implementation 'skin.support:skin-support:4.0.5'                   // skin-support
-//    implementation 'skin.support:skin-support-appcompat:4.0.5'         // skin-support 基础控件支持
-//    implementation 'skin.support:skin-support-design:4.0.5'            // skin-support-design material design 控件支持[可选]
-    implementation 'skin.support:skin-support-cardview:4.0.5'          // skin-support-cardview CardView 控件支持[可选]
-    implementation 'skin.support:skin-support-constraint-layout:4.0.5' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
-
-    implementation project(':androidx:skin-support')
-    implementation project(':androidx:skin-support-appcompat')
-    implementation project(':androidx:skin-support-design')
+    if (isUseLocal) {
+        implementation project(':androidx:skin-support')
+        implementation project(':androidx:skin-support-appcompat')
+        implementation project(':androidx:skin-support-design')
+        implementation project(':androidx:skin-support-constraint-layout')
+        implementation project(':androidx:skin-support-cardview')
+    } else {
+        // skin-support
+        implementation "io.github.boiqin:skin-support:$skinAndroidXVersion"
+        // skin-support 基础控件支持
+        implementation "io.github.boiqin:skin-support-appcompat:$skinAndroidXVersion"
+        // skin-support-design material design 控件支持[可选]
+        implementation "io.github.boiqin:skin-support-material:$skinAndroidXVersion"
+        // skin-support-cardview CardView 控件支持[可选]
+        implementation "io.github.boiqin:skin-support-cardview:$skinAndroidXVersion"
+        // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
+        implementation "io.github.boiqin:skin-support-constraintlayout:$skinAndroidXVersion"
+    }
 }

@@ -27,7 +27,7 @@ dependencies {
     implementation "androidx.exifinterface:exifinterface:1.3.7"
 }
 
-tasks.withType(Javadoc) {
+tasks.withType(Javadoc).configureEach {
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
