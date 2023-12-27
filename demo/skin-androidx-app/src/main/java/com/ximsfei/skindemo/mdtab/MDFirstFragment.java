@@ -2,9 +2,6 @@ package com.ximsfei.skindemo.mdtab;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.ximsfei.skindemo.R;
 
 /**
@@ -41,9 +42,9 @@ public class MDFirstFragment extends Fragment {
     }
 
     private void initTextInputLayout2() {
-        textInputLayout2 = (TextInputLayout) mView.findViewById(R.id.textInputLayout2);
+        textInputLayout2 = mView.findViewById(R.id.textInputLayout2);
         textInputLayout2.setHint("请输入4位学号");
-        editText2 = (EditText) mView.findViewById(R.id.editText2);
+        editText2 = mView.findViewById(R.id.editText2);
         editText2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -65,9 +66,9 @@ public class MDFirstFragment extends Fragment {
     }
 
     private void initTextInputLayout() {
-        textInputLayout = (TextInputLayout) mView.findViewById(R.id.textInputLayout);
+        textInputLayout = mView.findViewById(R.id.textInputLayout);
         textInputLayout.setHint("请输入4位学号");
-        editText = (EditText) mView.findViewById(R.id.editText);
+        editText = mView.findViewById(R.id.editText);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

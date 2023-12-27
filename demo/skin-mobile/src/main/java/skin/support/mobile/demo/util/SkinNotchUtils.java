@@ -34,16 +34,13 @@ public class SkinNotchUtils {
     public static boolean hasNotchInVivo(Context context) {
         boolean ret = false;
         try {
-            ClassLoader cl = context.getClassLoader();
-            Class ftFeature = cl.loadClass("android.util.FtFeature");
+            ClassLoader clazz = context.getClassLoader();
+            Class<?> ftFeature = clazz.loadClass("android.util.FtFeature");
             Method[] methods = ftFeature.getDeclaredMethods();
-            if (methods != null) {
-                for (int i = 0; i < methods.length; i++) {
-                    Method method = methods[i];
-                    if (method.getName().equalsIgnoreCase("isFeatureSupport")) {
-                        ret = (boolean) method.invoke(ftFeature, NOTCH_IN_SCREEN_VOIO);
-                        break;
-                    }
+            for (Method method : methods) {
+                if (method.getName().equalsIgnoreCase("isFeatureSupport")) {
+                    ret = (boolean) method.invoke(ftFeature, NOTCH_IN_SCREEN_VOIO);
+                    break;
                 }
             }
         } catch (ClassNotFoundException e) {

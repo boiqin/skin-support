@@ -24,7 +24,7 @@ public class ViewFindUtils
 
 		if (viewHolder == null)
 		{
-			viewHolder = new SparseArray<View>();
+			viewHolder = new SparseArray<>();
 			view.setTag(viewHolder);
 		}
 
@@ -44,6 +44,6 @@ public class ViewFindUtils
 	 */
 	public static <T extends View> T find(View view, int id)
 	{
-		return (T) view.findViewById(id);
+		return view.findViewById(id);
 	}
 }

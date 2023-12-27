@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.legacy.widget.Space
+                <Space
                     android:id="@+id/textSpacerNoTitle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_dialog_padding_top_material"
@@ -49,7 +49,7 @@
                     android:paddingRight="?attr/dialogPreferredPadding"
                     android:textColor="?attr/skinAlertDialogMessageTextColor" />
 
-                <androidx.legacy.widget.Space
+                <Space
                     android:id="@+id/textSpacerNoButtons"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/skin_dialog_padding_top"

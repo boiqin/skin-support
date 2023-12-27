@@ -3,8 +3,6 @@ package com.ximsfei.skindemo.alert;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.ximsfei.skindemo.BaseActivity;
 import com.ximsfei.skindemo.R;
@@ -28,7 +29,7 @@ public class AlertDialogActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert_dialog);
         initToolbar();
-        mListView = (ListView) findViewById(R.id.list);
+        mListView = findViewById(R.id.list);
         mListView.setCacheColorHint(Color.TRANSPARENT);
         mListView.setFadingEdgeLength(0);
         mListView.setAdapter(new AlertDialogAdapter());

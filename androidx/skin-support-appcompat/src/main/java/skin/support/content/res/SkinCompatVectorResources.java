@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
 
 public class SkinCompatVectorResources implements SkinResources {
 
@@ -74,7 +75,8 @@ public class SkinCompatVectorResources implements SkinResources {
             if (!SkinCompatResources.getInstance().isDefaultSkin()) {
                 int targetResId = SkinCompatResources.getInstance().getTargetResId(context, resId);
                 if (targetResId != 0) {
-                    return SkinCompatResources.getInstance().getSkinResources().getDrawable(targetResId);
+                    return ResourcesCompat.getDrawable(
+                            SkinCompatResources.getInstance().getSkinResources(), targetResId, context.getTheme());
                 }
             }
         }

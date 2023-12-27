@@ -15,13 +15,10 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         TextView buildTimeTv = findViewById(R.id.tv_build_time);
         buildTimeTv.setText(String.format(getString(R.string.splash_build_time), BuildConfig.BUILD_TIME));
-        buildTimeTv.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        buildTimeTv.postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }, 2000);
     }
 }

@@ -5,11 +5,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ximsfei.skindemo.R;
 
@@ -48,7 +50,7 @@ public class CustomDividerItemDecoration extends RecyclerView.ItemDecoration {
      */
     public CustomDividerItemDecoration(Context context, int orientation) {
 //        final TypedArray a = context.obtainStyledAttributes(ATTRS);
-        mDivider = context.getResources().getDrawable(R.drawable.picture);
+        mDivider = ResourcesCompat.getDrawable(context.getResources(), R.drawable.picture, context.getTheme());
         setOrientation(orientation);
     }
 

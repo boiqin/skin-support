@@ -42,7 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="42dp"
                 android:src="@mipmap/ic_launcher"
-                android:tint="@color/colorPrimaryReverse" />
+                app:tint="@color/colorPrimaryReverse" />
 
             <TextView
                 android:id="@+id/tv_skin_name"

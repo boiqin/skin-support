@@ -40,19 +40,10 @@ public class SkinDeviceUtils {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             // android 8.0，读取 /system/uild.prop 会报 permission denied
-            FileInputStream fileInputStream = null;
-            try {
-                fileInputStream = new FileInputStream(new File(Environment.getRootDirectory(), "build.prop"));
+            try (FileInputStream fileInputStream = new FileInputStream(new File(Environment.getRootDirectory(), "build.prop"))) {
                 properties.load(fileInputStream);
             } catch (Exception e) {
                 Slog.i(TAG, "read file error");
-            } finally {
-                if (fileInputStream != null) {
-                    try {
-                        fileInputStream.close();
-                    } catch (Throwable e) {
-                    }
-                }
             }
         }
 

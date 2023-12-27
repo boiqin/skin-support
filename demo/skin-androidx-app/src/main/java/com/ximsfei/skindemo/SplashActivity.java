@@ -5,24 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.ximsfei.skindemo.actionbar.ActionbarTestActivity;
 import com.ximsfei.skindemo.alert.AlertDialogActivity;
-import com.ximsfei.skindemo.picker.ColorPickerActivity;
 import com.ximsfei.skindemo.constraint.ConstraintLayoutActivity;
 import com.ximsfei.skindemo.flycotablayout.ui.SimpleHomeActivity;
 import com.ximsfei.skindemo.mdtab.MaterialDesignActivity;
+import com.ximsfei.skindemo.picker.ColorPickerActivity;
 import com.ximsfei.skindemo.picker.DrawablePickerActivity;
 import com.ximsfei.skindemo.tab.MainActivity;
 import com.ximsfei.skindemo.test.TestActivity;
@@ -69,17 +69,14 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         initToolbar();
 
-        mListView = (ListView) findViewById(R.id.list);
+        mListView = findViewById(R.id.list);
         mListView.setCacheColorHint(Color.TRANSPARENT);
         mListView.setFadingEdgeLength(0);
         mListView.setAdapter(new HomeAdapter(mContext, mItems));
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, mClasses[position]);
-                startActivity(intent);
-            }
+        mListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(mContext, mClasses[position]);
+            startActivity(intent);
         });
     }
 

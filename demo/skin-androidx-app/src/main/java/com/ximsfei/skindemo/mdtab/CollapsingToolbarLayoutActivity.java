@@ -2,9 +2,6 @@ package com.ximsfei.skindemo.mdtab;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
@@ -12,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.ximsfei.skindemo.BaseActivity;
 import com.ximsfei.skindemo.R;
 import com.ximsfei.skindemo.settings.SettingsActivity;
@@ -47,31 +48,24 @@ public class CollapsingToolbarLayoutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collapsing_toolbar_layout);
-        mIvPlaceholder = (ImageView) findViewById(R.id.main_iv_placeholder);
-        mLlTitleContainer = (LinearLayout) findViewById(R.id.main_ll_title_container);
-        mFlTitleContainer = (FrameLayout) findViewById(R.id.main_fl_title);
-        mAblAppBar = (AppBarLayout) findViewById(R.id.main_abl_app_bar);
-        mTvToolbarTitle = (TextView) findViewById(R.id.main_tv_toolbar_title);
-        mTbToolbar = (Toolbar) findViewById(R.id.main_tb_toolbar);
+        mIvPlaceholder = findViewById(R.id.main_iv_placeholder);
+        mLlTitleContainer = findViewById(R.id.main_ll_title_container);
+        mFlTitleContainer = findViewById(R.id.main_fl_title);
+        mAblAppBar = findViewById(R.id.main_abl_app_bar);
+        mTvToolbarTitle = findViewById(R.id.main_tv_toolbar_title);
+        mTbToolbar = findViewById(R.id.main_tb_toolbar);
         mTbToolbar.setTitle("");
 
         // AppBar的监听
-        mAblAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int maxScroll = appBarLayout.getTotalScrollRange();
-                float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
-                handleAlphaOnTitle(percentage);
-                handleToolbarTitleVisibility(percentage);
-            }
+        mAblAppBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            int maxScroll = appBarLayout.getTotalScrollRange();
+            float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+            handleAlphaOnTitle(percentage);
+            handleToolbarTitleVisibility(percentage);
         });
 
-        findViewById(R.id.small_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CollapsingToolbarLayoutActivity.this, SettingsActivity.class));
-            }
-        });
+        findViewById(R.id.small_photo).setOnClickListener(
+                view -> startActivity(new Intent(CollapsingToolbarLayoutActivity.this, SettingsActivity.class)));
 
         initParallaxValues(); // 自动滑动效果
     }

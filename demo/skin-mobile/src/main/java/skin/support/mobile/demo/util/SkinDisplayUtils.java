@@ -411,14 +411,7 @@ public class SkinDisplayUtils {
      */
     @SuppressWarnings("SimplifiableIfStatement")
     public static boolean hasHardwareMenuKey(Context context) {
-        boolean flag;
-        if (Build.VERSION.SDK_INT < 11)
-            flag = true;
-        else if (Build.VERSION.SDK_INT >= 14) {
-            flag = ViewConfiguration.get(context).hasPermanentMenuKey();
-        } else
-            flag = false;
-        return flag;
+        return ViewConfiguration.get(context).hasPermanentMenuKey();
     }
 
     /**
