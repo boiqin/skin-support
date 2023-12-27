@@ -153,7 +153,7 @@ public final class ColorState {
                     stateColorList.add(windowFocusedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorSelected)) {
@@ -165,7 +165,7 @@ public final class ColorState {
                     stateColorList.add(selectedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorFocused)) {
@@ -177,7 +177,7 @@ public final class ColorState {
                     stateColorList.add(focusedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorEnabled)) {
@@ -189,7 +189,7 @@ public final class ColorState {
                     stateColorList.add(enabledColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorPressed)) {
@@ -201,7 +201,7 @@ public final class ColorState {
                     stateColorList.add(pressedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorChecked)) {
@@ -213,7 +213,7 @@ public final class ColorState {
                     stateColorList.add(checkedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorActivated)) {
@@ -225,7 +225,7 @@ public final class ColorState {
                     stateColorList.add(activatedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorAccelerated)) {
@@ -237,7 +237,7 @@ public final class ColorState {
                     stateColorList.add(acceleratedColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorHovered)) {
@@ -249,7 +249,7 @@ public final class ColorState {
                     stateColorList.add(hoveredColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorDragCanAccept)) {
@@ -261,7 +261,7 @@ public final class ColorState {
                     stateColorList.add(dragCanAcceptColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!TextUtils.isEmpty(colorDragHovered)) {
@@ -273,7 +273,7 @@ public final class ColorState {
                     stateColorList.add(dragHoveredColorInt);
                     stateColorCount++;
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         try {

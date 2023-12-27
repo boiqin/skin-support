@@ -1,16 +1,17 @@
 package skin.support.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 
 import androidx.appcompat.widget.ContentFrameLayout;
 /**
  * @author littlefogcat
  * @email littlefogcat@foxmail.com
  */
+@SuppressLint("RestrictedApi")
 public class SkinCompatContentFrameLayout extends ContentFrameLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatContentFrameLayout(Context context) {
         this(context, null);

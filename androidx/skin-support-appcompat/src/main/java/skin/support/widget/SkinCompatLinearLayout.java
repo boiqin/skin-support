@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
  */
 
 public class SkinCompatLinearLayout extends LinearLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatLinearLayout(Context context) {
         this(context, null);

@@ -1,24 +1,26 @@
 package skin.support.design.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
-import androidx.annotation.DrawableRes;
-import com.google.android.material.textfield.TextInputEditText;
-import androidx.appcompat.R;
 import android.util.AttributeSet;
+
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.R;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import skin.support.widget.SkinCompatBackgroundHelper;
 import skin.support.widget.SkinCompatSupportable;
 import skin.support.widget.SkinCompatTextHelper;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * Created by ximsfei on 2017/1/10.
  */
 
 public class SkinMaterialTextInputEditText extends TextInputEditText implements SkinCompatSupportable {
-    private SkinCompatTextHelper mTextHelper;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatTextHelper mTextHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinMaterialTextInputEditText(Context context) {
         this(context, null);

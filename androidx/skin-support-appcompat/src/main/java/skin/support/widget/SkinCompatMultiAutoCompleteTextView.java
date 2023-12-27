@@ -1,16 +1,17 @@
 package skin.support.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
-import android.util.AttributeSet;
 
 import skin.support.appcompat.R;
 import skin.support.content.res.SkinCompatVectorResources;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * @author ximsfei
@@ -22,8 +23,8 @@ public class SkinCompatMultiAutoCompleteTextView extends AppCompatMultiAutoCompl
             android.R.attr.popupBackground
     };
     private int mDropDownBackgroundResId = INVALID_ID;
-    private SkinCompatTextHelper mTextHelper;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatTextHelper mTextHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatMultiAutoCompleteTextView(Context context) {
         this(context, null);

@@ -66,7 +66,7 @@ public class SkinCompatUserThemeManager {
         if (!TextUtils.isEmpty(colors)) {
             JSONArray jsonArray = new JSONArray(colors);
             if (Slog.DEBUG) {
-                Slog.i(TAG, "startLoadFromSharedPreferences: " + jsonArray.toString());
+                Slog.i(TAG, "startLoadFromSharedPreferences: " + jsonArray);
             }
             int count = jsonArray.length();
             for (int i = 0; i < count; i++) {
@@ -115,7 +115,7 @@ public class SkinCompatUserThemeManager {
             }
         }
         if (Slog.DEBUG) {
-            Slog.i(TAG, "Apply user theme: " + jsonArray.toString());
+            Slog.i(TAG, "Apply user theme: " + jsonArray);
         }
         SkinPreference.getInstance().setUserTheme(jsonArray.toString()).commitEditor();
         SkinCompatManager.getInstance().notifyUpdateSkin();
@@ -199,7 +199,7 @@ public class SkinCompatUserThemeManager {
         String entry = getEntryName(drawableRes, KEY_TYPE_DRAWABLE);
         if (!TextUtils.isEmpty(entry)) {
             int angle = ImageUtils.getImageRotateAngle(drawablePath);
-            String drawablePathAndAngle = drawablePath + ":" + String.valueOf(angle);
+            String drawablePathAndAngle = drawablePath + ":" + angle;
             mDrawablePathAndAngleMap.put(entry, drawablePathAndAngle);
             removeDrawableInCache(drawableRes);
             mDrawableEmpty = false;
@@ -212,7 +212,7 @@ public class SkinCompatUserThemeManager {
         }
         String entry = getEntryName(drawableRes, KEY_TYPE_DRAWABLE);
         if (!TextUtils.isEmpty(entry)) {
-            String drawablePathAndAngle = drawablePath + ":" + String.valueOf(angle);
+            String drawablePathAndAngle = drawablePath + ":" + angle;
             mDrawablePathAndAngleMap.put(entry, drawablePathAndAngle);
             removeDrawableInCache(drawableRes);
             mDrawableEmpty = false;
@@ -242,7 +242,7 @@ public class SkinCompatUserThemeManager {
         if (!TextUtils.isEmpty(drawablePathAndAngle)) {
             String[] splits = drawablePathAndAngle.split(":");
             if (splits.length == 2) {
-                return Integer.valueOf(splits[1]);
+                return Integer.parseInt(splits[1]);
             }
         }
         return 0;
@@ -259,7 +259,7 @@ public class SkinCompatUserThemeManager {
                     String path = splits[0];
                     int angle = 0;
                     if (splits.length == 2) {
-                        angle = Integer.valueOf(splits[1]);
+                        angle = Integer.parseInt(splits[1]);
                     }
                     if (checkPathValid(path)) {
                         if (angle == 0) {

@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
  */
 
 public class SkinCompatFrameLayout extends FrameLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatFrameLayout(Context context) {
         this(context, null);

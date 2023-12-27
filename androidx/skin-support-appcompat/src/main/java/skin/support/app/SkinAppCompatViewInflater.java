@@ -153,7 +153,7 @@ public class SkinAppCompatViewInflater implements SkinLayoutInflater, SkinWrappe
 
         // We can emulate Lollipop's android:theme attribute propagating down the view hierarchy
         // by using the parent's context
-        if (inheritContext && parent != null) {
+        if (inheritContext) {
             context = parent.getContext();
         }
         boolean readAndroidTheme = isPre21; /* Only read android:theme pre-L (L+ handles this anyway) */

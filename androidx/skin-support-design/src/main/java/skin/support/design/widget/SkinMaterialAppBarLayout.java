@@ -1,8 +1,9 @@
 package skin.support.design.widget;
 
 import android.content.Context;
-import com.google.android.material.appbar.AppBarLayout;
 import android.util.AttributeSet;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import skin.support.widget.SkinCompatBackgroundHelper;
 import skin.support.widget.SkinCompatSupportable;
@@ -12,7 +13,7 @@ import skin.support.widget.SkinCompatSupportable;
  */
 
 public class SkinMaterialAppBarLayout extends AppBarLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinMaterialAppBarLayout(Context context) {
         this(context, null);

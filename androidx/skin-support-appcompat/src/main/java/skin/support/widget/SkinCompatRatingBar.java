@@ -1,8 +1,9 @@
 package skin.support.widget;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatRatingBar;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatRatingBar;
 
 import skin.support.appcompat.R;
 
@@ -11,7 +12,7 @@ import skin.support.appcompat.R;
  */
 
 public class SkinCompatRatingBar extends AppCompatRatingBar implements SkinCompatSupportable {
-    private SkinCompatProgressBarHelper mSkinCompatProgressBarHelper;
+    private final SkinCompatProgressBarHelper mSkinCompatProgressBarHelper;
 
     public SkinCompatRatingBar(Context context) {
         this(context, null);

@@ -299,7 +299,7 @@ public class SkinCompatManager extends SkinObservable {
      *
      * @return
      */
-    public AsyncTask loadSkin() {
+    public AsyncTask<String, Void, String> loadSkin() {
         String skin = SkinPreference.getInstance().getSkinName();
         int strategy = SkinPreference.getInstance().getSkinStrategy();
         if (TextUtils.isEmpty(skin) || strategy == SKIN_LOADER_STRATEGY_NONE) {
@@ -314,7 +314,7 @@ public class SkinCompatManager extends SkinObservable {
      * @param listener 皮肤包加载监听.
      * @return
      */
-    public AsyncTask loadSkin(SkinLoaderListener listener) {
+    public AsyncTask<String, Void, String> loadSkin(SkinLoaderListener listener) {
         String skin = SkinPreference.getInstance().getSkinName();
         int strategy = SkinPreference.getInstance().getSkinStrategy();
         if (TextUtils.isEmpty(skin) || strategy == SKIN_LOADER_STRATEGY_NONE) {
@@ -324,12 +324,12 @@ public class SkinCompatManager extends SkinObservable {
     }
 
     @Deprecated
-    public AsyncTask loadSkin(String skinName) {
+    public AsyncTask<String, Void, String> loadSkin(String skinName) {
         return loadSkin(skinName, null);
     }
 
     @Deprecated
-    public AsyncTask loadSkin(String skinName, final SkinLoaderListener listener) {
+    public AsyncTask<String, Void, String> loadSkin(String skinName, final SkinLoaderListener listener) {
         return loadSkin(skinName, listener, SKIN_LOADER_STRATEGY_ASSETS);
     }
 
@@ -340,7 +340,7 @@ public class SkinCompatManager extends SkinObservable {
      * @param strategy 皮肤包加载策略.
      * @return
      */
-    public AsyncTask loadSkin(String skinName, int strategy) {
+    public AsyncTask<String, Void, String> loadSkin(String skinName, int strategy) {
         return loadSkin(skinName, null, strategy);
     }
 
@@ -352,7 +352,7 @@ public class SkinCompatManager extends SkinObservable {
      * @param strategy 皮肤包加载策略.
      * @return
      */
-    public AsyncTask loadSkin(String skinName, SkinLoaderListener listener, int strategy) {
+    public AsyncTask<String, Void, String> loadSkin(String skinName, SkinLoaderListener listener, int strategy) {
         SkinLoaderStrategy loaderStrategy = mStrategyMap.get(strategy);
         if (loaderStrategy == null) {
             return null;
@@ -439,7 +439,7 @@ public class SkinCompatManager extends SkinObservable {
     public String getSkinPackageName(String skinPkgPath) {
         PackageManager mPm = mAppContext.getPackageManager();
         PackageInfo info = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
-        return info.packageName;
+        return info != null ? info.packageName : "";
     }
 
     /**
@@ -452,11 +452,13 @@ public class SkinCompatManager extends SkinObservable {
     public Resources getSkinResources(String skinPkgPath) {
         try {
             PackageInfo packageInfo = mAppContext.getPackageManager().getPackageArchiveInfo(skinPkgPath, 0);
-            packageInfo.applicationInfo.sourceDir = skinPkgPath;
-            packageInfo.applicationInfo.publicSourceDir = skinPkgPath;
-            Resources res = mAppContext.getPackageManager().getResourcesForApplication(packageInfo.applicationInfo);
-            Resources superRes = mAppContext.getResources();
-            return new Resources(res.getAssets(), superRes.getDisplayMetrics(), superRes.getConfiguration());
+            if (packageInfo != null) {
+                packageInfo.applicationInfo.sourceDir = skinPkgPath;
+                packageInfo.applicationInfo.publicSourceDir = skinPkgPath;
+                Resources res = mAppContext.getPackageManager().getResourcesForApplication(packageInfo.applicationInfo);
+                Resources superRes = mAppContext.getResources();
+                return new Resources(res.getAssets(), superRes.getDisplayMetrics(), superRes.getConfiguration());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

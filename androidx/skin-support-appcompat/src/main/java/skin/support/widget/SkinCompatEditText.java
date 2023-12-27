@@ -1,20 +1,21 @@
 package skin.support.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.R;
 import androidx.appcompat.widget.AppCompatEditText;
-import android.util.AttributeSet;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * Created by ximsfei on 2017/1/10.
  */
 
 public class SkinCompatEditText extends AppCompatEditText implements SkinCompatSupportable {
-    private SkinCompatTextHelper mTextHelper;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatTextHelper mTextHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatEditText(Context context) {
         this(context, null);

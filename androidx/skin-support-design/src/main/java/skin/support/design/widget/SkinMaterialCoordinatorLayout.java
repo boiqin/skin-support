@@ -1,8 +1,9 @@
 package skin.support.design.widget;
 
 import android.content.Context;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import skin.support.widget.SkinCompatBackgroundHelper;
 import skin.support.widget.SkinCompatSupportable;
@@ -13,7 +14,7 @@ import skin.support.widget.SkinCompatSupportable;
 
 public class SkinMaterialCoordinatorLayout extends CoordinatorLayout implements SkinCompatSupportable {
 
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinMaterialCoordinatorLayout(Context context) {
         this(context, null);

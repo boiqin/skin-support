@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
  */
 
 public class SkinCompatRelativeLayout extends RelativeLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatRelativeLayout(Context context) {
         this(context, null);

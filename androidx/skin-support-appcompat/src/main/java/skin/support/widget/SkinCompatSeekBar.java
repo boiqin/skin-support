@@ -1,8 +1,9 @@
 package skin.support.widget;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatSeekBar;
 
 import skin.support.appcompat.R;
 
@@ -11,7 +12,7 @@ import skin.support.appcompat.R;
  */
 
 public class SkinCompatSeekBar extends AppCompatSeekBar implements SkinCompatSupportable {
-    private SkinCompatSeekBarHelper mSkinCompatSeekBarHelper;
+    private final SkinCompatSeekBarHelper mSkinCompatSeekBarHelper;
 
     public SkinCompatSeekBar(Context context) {
         this(context, null);

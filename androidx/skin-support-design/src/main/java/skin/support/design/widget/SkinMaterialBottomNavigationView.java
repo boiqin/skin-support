@@ -26,7 +26,7 @@ public class SkinMaterialBottomNavigationView extends BottomNavigationView imple
     private static final int[] DISABLED_STATE_SET = new int[]{-android.R.attr.state_enabled};
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
 
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     private int mTextColorResId = INVALID_ID;
     private int mIconTintResId = INVALID_ID;

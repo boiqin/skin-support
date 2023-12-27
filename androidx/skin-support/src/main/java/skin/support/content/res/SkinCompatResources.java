@@ -6,11 +6,12 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.TypedValue;
 
 import androidx.annotation.AnyRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,10 +152,7 @@ public class SkinCompatResources {
                 return mResources.getColor(targetResId);
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.getResources().getColor(resId, context.getTheme());
-        }
-        return context.getResources().getColor(resId);
+        return ResourcesCompat.getColor(context.getResources(), resId, context.getTheme());
     }
 
     private ColorStateList getSkinColorStateList(Context context, int resId) {
@@ -173,13 +171,11 @@ public class SkinCompatResources {
         if (!isDefaultSkin) {
             int targetResId = getTargetResId(context, resId);
             if (targetResId != 0) {
-                return mResources.getColorStateList(targetResId);
+                return AppCompatResources.getColorStateList(context, targetResId);
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.getResources().getColorStateList(resId, context.getTheme());
-        }
-        return context.getResources().getColorStateList(resId);
+        return ResourcesCompat.getColorStateList(context.getResources(), resId, context.getTheme());
+
     }
 
     private Drawable getSkinDrawable(Context context, int resId) {
@@ -204,13 +200,10 @@ public class SkinCompatResources {
         if (!isDefaultSkin) {
             int targetResId = getTargetResId(context, resId);
             if (targetResId != 0) {
-                return mResources.getDrawable(targetResId);
+                return ResourcesCompat.getDrawable(context.getResources(), targetResId, context.getTheme());
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return context.getResources().getDrawable(resId, context.getTheme());
-        }
-        return context.getResources().getDrawable(resId);
+        return ResourcesCompat.getDrawable(context.getResources(), resId, context.getTheme());
     }
 
     Drawable getStrategyDrawable(Context context, int resId) {

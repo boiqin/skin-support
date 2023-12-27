@@ -1,17 +1,18 @@
 package skin.support.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import android.util.AttributeSet;
 
 import skin.support.appcompat.R;
 import skin.support.content.res.SkinCompatResources;
 import skin.support.content.res.SkinCompatVectorResources;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * Created by ximsfei on 17-1-12.
@@ -21,7 +22,7 @@ public class SkinCompatToolbar extends Toolbar implements SkinCompatSupportable 
     private int mTitleTextColorResId = INVALID_ID;
     private int mSubtitleTextColorResId = INVALID_ID;
     private int mNavigationIconResId = INVALID_ID;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatToolbar(Context context) {
         this(context, null);

@@ -1,9 +1,10 @@
 package skin.support.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import android.util.AttributeSet;
 
 import skin.support.appcompat.R;
 
@@ -12,9 +13,9 @@ import skin.support.appcompat.R;
  */
 
 public class SkinCompatCheckBox extends AppCompatCheckBox implements SkinCompatSupportable {
-    private SkinCompatCompoundButtonHelper mCompoundButtonHelper;
-    private SkinCompatTextHelper mTextHelper;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatCompoundButtonHelper mCompoundButtonHelper;
+    private final SkinCompatTextHelper mTextHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatCheckBox(Context context) {
         this(context, null);

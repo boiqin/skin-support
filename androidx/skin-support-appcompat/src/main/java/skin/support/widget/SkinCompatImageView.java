@@ -1,17 +1,18 @@
 package skin.support.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.AppCompatImageView;
-import android.util.AttributeSet;
 
 /**
  * Created by ximsfei on 2017/1/10.
  */
 
 public class SkinCompatImageView extends AppCompatImageView implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
-    private SkinCompatImageHelper mImageHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatImageHelper mImageHelper;
 
     public SkinCompatImageView(Context context) {
         this(context, null);

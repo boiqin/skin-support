@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
  */
 
 public class SkinCompatRadioGroup extends RadioGroup implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
     public SkinCompatRadioGroup(Context context) {
         this(context, null);
     }

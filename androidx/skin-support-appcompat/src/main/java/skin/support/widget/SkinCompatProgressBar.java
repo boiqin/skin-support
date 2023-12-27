@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
  */
 
 public class SkinCompatProgressBar extends ProgressBar implements SkinCompatSupportable {
-    private SkinCompatProgressBarHelper mSkinCompatProgressBarHelper;
+    private final SkinCompatProgressBarHelper mSkinCompatProgressBarHelper;
 
     public SkinCompatProgressBar(Context context) {
         this(context, null);

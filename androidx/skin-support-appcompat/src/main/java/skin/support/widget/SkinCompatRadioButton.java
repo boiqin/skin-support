@@ -1,9 +1,10 @@
 package skin.support.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.AppCompatRadioButton;
-import android.util.AttributeSet;
 
 import skin.support.appcompat.R;
 
@@ -12,9 +13,9 @@ import skin.support.appcompat.R;
  */
 
 public class SkinCompatRadioButton extends AppCompatRadioButton implements SkinCompatSupportable {
-    private SkinCompatTextHelper mTextHelper;
-    private SkinCompatCompoundButtonHelper mCompoundButtonHelper;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatTextHelper mTextHelper;
+    private final SkinCompatCompoundButtonHelper mCompoundButtonHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatRadioButton(Context context) {
         this(context, null);

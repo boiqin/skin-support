@@ -108,7 +108,7 @@ public class SkinCompatTextHelper extends SkinCompatHelper {
             try {
                 ColorStateList color = SkinCompatResources.getColorStateList(mView.getContext(), mTextColorHintResId);
                 mView.setHintTextColor(color);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -121,7 +121,7 @@ public class SkinCompatTextHelper extends SkinCompatHelper {
             try {
                 ColorStateList color = SkinCompatResources.getColorStateList(mView.getContext(), mTextColorResId);
                 mView.setTextColor(color);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }

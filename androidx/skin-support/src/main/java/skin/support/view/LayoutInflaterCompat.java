@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.lang.reflect.Field;
 
 import skin.support.utils.Slog;
@@ -16,7 +18,6 @@ public final class LayoutInflaterCompat {
 
     private static boolean sCheckedField;
 
-    @SuppressWarnings("deprecation")
     static class Factory2Wrapper implements LayoutInflater.Factory2 {
         final LayoutInflaterFactory mDelegateFactory;
 
@@ -25,16 +26,17 @@ public final class LayoutInflaterCompat {
         }
 
         @Override
-        public View onCreateView(String name, Context context, AttributeSet attrs) {
+        public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
             return mDelegateFactory.onCreateView(null, name, context, attrs);
         }
 
         @Override
-        public View onCreateView(View parent, String name, Context context,
-                                 AttributeSet attributeSet) {
+        public View onCreateView(View parent, @NonNull String name, @NonNull Context context,
+                                 @NonNull AttributeSet attributeSet) {
             return mDelegateFactory.onCreateView(parent, name, context, attributeSet);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return getClass().getName() + "{" + mDelegateFactory + "}";

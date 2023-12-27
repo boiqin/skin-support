@@ -6,7 +6,6 @@ import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColor;
 import static skin.support.content.res.SkinCompatThemeUtils.getThemeAttrColorStateList;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -27,7 +26,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.R;
 import androidx.collection.ArrayMap;
 import androidx.collection.LongSparseArray;
@@ -403,7 +401,7 @@ final class SkinCompatDrawableManager {
                     cache = new LongSparseArray<>();
                     mDrawableCaches.put(context, cache);
                 }
-                cache.put(key, new WeakReference<ConstantState>(cs));
+                cache.put(key, new WeakReference<>(cs));
             }
             return true;
         }
@@ -730,8 +728,6 @@ final class SkinCompatDrawableManager {
         }
     }
 
-    @RequiresApi(11)
-    @TargetApi(11)
     private static class AvdcInflateDelegate implements InflateDelegate {
         AvdcInflateDelegate() {
         }

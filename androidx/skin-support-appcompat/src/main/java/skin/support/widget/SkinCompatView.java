@@ -9,7 +9,7 @@ import android.view.View;
  */
 
 public class SkinCompatView extends View implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinCompatView(Context context) {
         this(context, null);

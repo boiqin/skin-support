@@ -191,17 +191,13 @@ public class SkinCompatViewInflater {
             }
         }
 
-        @NonNull
         private void resolveMethod(@Nullable Context context, @NonNull String name) {
             while (context != null) {
                 try {
                     if (!context.isRestricted()) {
-                        final Method method = context.getClass().getMethod(mMethodName, View.class);
-                        if (method != null) {
-                            mResolvedMethod = method;
-                            mResolvedContext = context;
-                            return;
-                        }
+                        mResolvedMethod = context.getClass().getMethod(mMethodName, View.class);
+                        mResolvedContext = context;
+                        return;
                     }
                 } catch (NoSuchMethodException e) {
                     // Failed to find method, keep searching up the hierarchy.

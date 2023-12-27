@@ -1,18 +1,19 @@
 package skin.support.design.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import android.util.AttributeSet;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import skin.support.content.res.SkinCompatVectorResources;
 import skin.support.design.R;
 import skin.support.widget.SkinCompatBackgroundHelper;
 import skin.support.widget.SkinCompatHelper;
 import skin.support.widget.SkinCompatSupportable;
-
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 
 /**
  * Created by ximsfei on 17-3-2.
@@ -21,7 +22,7 @@ import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 public class SkinMaterialCollapsingToolbarLayout extends CollapsingToolbarLayout implements SkinCompatSupportable {
     private int mContentScrimResId = INVALID_ID;
     private int mStatusBarScrimResId = INVALID_ID;
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
 
     public SkinMaterialCollapsingToolbarLayout(Context context) {
         this(context, null);

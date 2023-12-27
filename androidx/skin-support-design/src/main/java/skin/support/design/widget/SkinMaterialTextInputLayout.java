@@ -1,12 +1,16 @@
 package skin.support.design.widget;
 
+import static skin.support.widget.SkinCompatHelper.INVALID_ID;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import androidx.annotation.StyleRes;
-import com.google.android.material.textfield.TextInputLayout;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.StyleRes;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,14 +22,12 @@ import skin.support.widget.SkinCompatEditText;
 import skin.support.widget.SkinCompatHelper;
 import skin.support.widget.SkinCompatSupportable;
 
-import static skin.support.widget.SkinCompatHelper.INVALID_ID;
-
 /**
  * Created by ximsfei on 17-3-2.
  */
 
 public class SkinMaterialTextInputLayout extends TextInputLayout implements SkinCompatSupportable {
-    private SkinCompatBackgroundHelper mBackgroundTintHelper;
+    private final SkinCompatBackgroundHelper mBackgroundTintHelper;
     private int mPasswordToggleResId = INVALID_ID;
     private int mCounterTextColorResId = INVALID_ID;
     private int mErrorTextColorResId = INVALID_ID;
