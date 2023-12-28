@@ -15,11 +15,13 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import skin.support.app.SkinActivityLifecycle;
 import skin.support.app.SkinLayoutInflater;
 import skin.support.app.SkinWrapper;
 import skin.support.async.AsyncTask;
+import skin.support.async.AsyncWorker;
 import skin.support.content.res.SkinCompatResources;
 import skin.support.load.SkinAssetsLoader;
 import skin.support.load.SkinBuildInLoader;
@@ -134,8 +136,8 @@ public class SkinCompatManager extends SkinObservable {
     /**
      * 初始化换肤框架. 通过该方法初始化，应用中Activity需继承自{@link skin.support.app.SkinCompatActivity}.
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return SkinCompatManager
      */
     public static SkinCompatManager init(Context context) {
         if (sInstance == null) {
@@ -157,12 +159,23 @@ public class SkinCompatManager extends SkinObservable {
      * 初始化换肤框架，监听Activity生命周期. 通过该方法初始化，应用中Activity无需继承{@link skin.support.app.SkinCompatActivity}.
      *
      * @param application 应用Application.
-     * @return
+     * @return SkinCompatManager
      */
     public static SkinCompatManager withoutActivity(Application application) {
         init(application);
         SkinActivityLifecycle.init(application);
         return sInstance;
+    }
+
+    /**
+     * 可以使用自定义线程池替换内置的线程池，收敛线程
+     *
+     * @param executorService 自定义线程池
+     * @return SkinCompatManager
+     */
+    public SkinCompatManager setExecutorService(ExecutorService executorService) {
+        AsyncWorker.getInstance().setExecutorService(executorService);
+        return this;
     }
 
     private SkinCompatManager(Context context) {
@@ -185,7 +198,7 @@ public class SkinCompatManager extends SkinObservable {
      * 添加皮肤包加载策略.
      *
      * @param strategy 自定义加载策略
-     * @return
+     * @return SkinCompatManager
      */
     public SkinCompatManager addStrategy(SkinLoaderStrategy strategy) {
         mStrategyMap.put(strategy.getType(), strategy);
@@ -200,7 +213,7 @@ public class SkinCompatManager extends SkinObservable {
      * 自定义View换肤时，可选择添加一个{@link SkinLayoutInflater}
      *
      * @param inflater 在{@link skin.support.app.SkinCompatViewInflater#createView(Context, String, String)}方法中调用.
-     * @return
+     * @return SkinCompatManager
      */
     public SkinCompatManager addInflater(SkinLayoutInflater inflater) {
         if (inflater instanceof SkinWrapper) {
@@ -223,7 +236,7 @@ public class SkinCompatManager extends SkinObservable {
      * 自定义View换肤时，可选择添加一个{@link SkinLayoutInflater}
      *
      * @param inflater 在{@link skin.support.app.SkinCompatViewInflater#createView(Context, String, String)}方法中最先调用.
-     * @return
+     * @return SkinCompatManager
      */
     @Deprecated
     public SkinCompatManager addHookInflater(SkinLayoutInflater inflater) {
@@ -239,7 +252,7 @@ public class SkinCompatManager extends SkinObservable {
     /**
      * 获取当前皮肤包.
      *
-     * @return
+     * @return 皮肤包名称
      */
     @Deprecated
     public String getCurSkinName() {
@@ -257,7 +270,7 @@ public class SkinCompatManager extends SkinObservable {
      * 设置是否所有Activity都换肤.
      *
      * @param enable true: 所有Activity都换肤; false: 添加注解Skinable或实现SkinCompatSupportable的Activity支持换肤.
-     * @return
+     * @return SkinCompatManager
      */
     public SkinCompatManager setSkinAllActivityEnable(boolean enable) {
         mSkinAllActivityEnable = enable;
@@ -283,7 +296,7 @@ public class SkinCompatManager extends SkinObservable {
      * 设置WindowBackground换肤，使用Theme中的{@link android.R.attr#windowBackground}属性.
      *
      * @param enable true: 打开; false: 关闭.
-     * @return
+     * @return SkinCompatManager
      */
     public SkinCompatManager setSkinWindowBackgroundEnable(boolean enable) {
         mSkinWindowBackgroundColorEnable = enable;

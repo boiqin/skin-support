@@ -4,10 +4,25 @@ import android.os.Handler;
 import android.os.Looper;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncWorker {
-    private static final int NUMBER_OF_THREADS = 4;
+    private static final int CORE_POOL_SIZE = 1;
+    private static final int MAXIMUM_POOL_SIZE = 20;
+    private static final int KEEP_ALIVE_SECONDS = 3;
+
+    private static final ThreadFactory sThreadFactory = new ThreadFactory() {
+        private final AtomicInteger mCount = new AtomicInteger(1);
+
+        public Thread newThread(Runnable r) {
+            return new Thread(r, "AsyncTask #" + mCount.getAndIncrement());
+        }
+    };
+
 
     private ExecutorService mDefaultExecutorService;
     protected Handler mMainHandler;
@@ -22,12 +37,16 @@ public class AsyncWorker {
 
     public ExecutorService getExecutorService() {
         if (mDefaultExecutorService == null) {
-            mDefaultExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+            ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                    CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
+                    new SynchronousQueue<>(), sThreadFactory);
+            threadPoolExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
+            mDefaultExecutorService = threadPoolExecutor;
         }
         return mDefaultExecutorService;
     }
 
-    public void setDefaultExecutorService(ExecutorService executorService) {
+    public void setExecutorService(ExecutorService executorService) {
         if (mDefaultExecutorService != null) {
             mDefaultExecutorService.shutdownNow();
         }
