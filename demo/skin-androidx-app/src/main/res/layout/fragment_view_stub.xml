@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/md_fragment"
-        class="com.ximsfei.skindemo.mdtab.MDFirstFragment"
+        class="com.boiqin.skindemo.mdtab.MDFirstFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

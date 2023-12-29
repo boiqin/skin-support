@@ -4,7 +4,7 @@ android {
     compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.ximsfei.skindemo.night"
+        applicationId "com.boiqin.skindemo.night"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1

@@ -302,8 +302,8 @@ eg: [res-night](https://github.com/ximsfei/Android-skin-support/tree/master/demo
 
 例如:
 ```xml
-宿主包名: com.ximsfei.skindemo
-夜间模式: com.ximsfei.skindemo.night
+宿主包名: com.boiqin.skindemo
+夜间模式: com.boiqin.skindemo.night
 ```
 
 #### 将需要换肤的资源放到res目录下(同名资源)

@@ -126,6 +126,6 @@
         android:src="@drawable/small"
         app:civ_border_color="@color/circle_border_color"
         app:civ_border_width="2dp"
-        app:layout_behavior="com.ximsfei.skindemo.coordinator.AvatarImageBehavior" />
+        app:layout_behavior="com.boiqin.skindemo.coordinator.AvatarImageBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

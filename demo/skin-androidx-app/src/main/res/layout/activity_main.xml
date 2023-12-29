@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.ximsfei.skindemo.widget.SkinDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.boiqin.skindemo.widget.SkinDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -67,4 +67,4 @@
         app:itemTextColor="@color/text_color"
         app:itemBackground="@color/circle_border_color"
         app:menu="@menu/bottom_navigation_view_menu" />
-</com.ximsfei.skindemo.widget.SkinDrawerLayout>
+</com.boiqin.skindemo.widget.SkinDrawerLayout>
