@@ -13,7 +13,7 @@ public abstract class AsyncTask<Input, Progress, Output> {
     }
 
     public void setExecutorService(ExecutorService executorService) {
-        AsyncWorker.getInstance().setDefaultExecutorService(executorService);
+        AsyncWorker.getInstance().setExecutorService(executorService);
     }
 
     /**
