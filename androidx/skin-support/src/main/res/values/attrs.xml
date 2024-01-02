@@ -21,6 +21,13 @@
         <attr name="android:textAppearance" />
     </declare-styleable>
 
+    <declare-styleable name="SkinCompatScrollBarHelper">
+        <attr name="android:scrollbarThumbVertical" />
+        <attr name="android:scrollbarTrackVertical" />
+        <attr name="android:scrollbarThumbHorizontal" />
+        <attr name="android:scrollbarTrackHorizontal" />
+    </declare-styleable>
+
     <declare-styleable name="SkinTextAppearance">
         <attr name="android:textSize" />
         <attr name="android:textColor" />
