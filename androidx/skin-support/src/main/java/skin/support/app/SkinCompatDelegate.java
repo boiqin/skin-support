@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -28,30 +29,19 @@ public class SkinCompatDelegate implements LayoutInflater.Factory2 {
     }
 
     @Override
-    public View onCreateView(View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        View view = createView(parent, name, context, attrs);
-
-        if (view == null) {
-            return null;
-        }
-        if (view instanceof SkinCompatSupportable) {
-            mSkinHelpers.add(new WeakReference<>((SkinCompatSupportable) view));
-        }
-
-        return view;
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return onCreateView(null, name, context, attrs);
     }
 
     @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        View view = createView(null, name, context, attrs);
-
+    public View onCreateView(View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        View view = createView(parent, name, context, attrs);
         if (view == null) {
             return null;
         }
         if (view instanceof SkinCompatSupportable) {
             mSkinHelpers.add(new WeakReference<>((SkinCompatSupportable) view));
         }
-
         return view;
     }
 
@@ -76,12 +66,17 @@ public class SkinCompatDelegate implements LayoutInflater.Factory2 {
     }
 
     public void applySkin() {
-        if (!mSkinHelpers.isEmpty()) {
-            for (WeakReference<SkinCompatSupportable> ref : mSkinHelpers) {
-                if (ref != null && ref.get() != null) {
-                    ref.get().applySkin();
-                }
+        if (mSkinHelpers.isEmpty()) {
+            return;
+        }
+        List<WeakReference<SkinCompatSupportable>> invalidRefs = new ArrayList<>();
+        for (WeakReference<SkinCompatSupportable> ref : mSkinHelpers) {
+            if (ref != null && ref.get() != null) {
+                ref.get().applySkin();
+            } else {
+                invalidRefs.add(ref);
             }
         }
+        mSkinHelpers.removeAll(invalidRefs);
     }
 }
