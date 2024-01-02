@@ -73,25 +73,25 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
             return;
         }
         try {
-            if (sVerticalThumbDrawableMethod != null && mThumbVerticalResId == INVALID_ID) {
+            if (sVerticalThumbDrawableMethod != null && mThumbVerticalResId != INVALID_ID) {
                 Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mThumbVerticalResId);
                 if (drawable != null) {
                     sVerticalThumbDrawableMethod.invoke(mScrollBar, drawable);
                 }
             }
-            if (sVerticalTrackDrawableMethod != null && mTrackVerticalResId == INVALID_ID) {
+            if (sVerticalTrackDrawableMethod != null && mTrackVerticalResId != INVALID_ID) {
                 Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mTrackVerticalResId);
                 if (drawable != null) {
                     sVerticalTrackDrawableMethod.invoke(mScrollBar, drawable);
                 }
             }
-            if (sHorizontalThumbDrawableMethod != null && mThumbHorizontalResId == INVALID_ID) {
+            if (sHorizontalThumbDrawableMethod != null && mThumbHorizontalResId != INVALID_ID) {
                 Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mThumbHorizontalResId);
                 if (drawable != null) {
                     sHorizontalThumbDrawableMethod.invoke(mScrollBar, drawable);
                 }
             }
-            if (sHorizontalTrackDrawableMethod != null && mTrackHorizontalResId == INVALID_ID) {
+            if (sHorizontalTrackDrawableMethod != null && mTrackHorizontalResId != INVALID_ID) {
                 Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mTrackHorizontalResId);
                 if (drawable != null) {
                     sHorizontalTrackDrawableMethod.invoke(mScrollBar, drawable);
@@ -108,7 +108,7 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
             // 滚动条相关属性定义在父类View中
             Field field = View.class.getDeclaredField("mScrollCache");
             field.setAccessible(true);
-            Object scrollCache = field.get(this);
+            Object scrollCache = field.get(mView);
             if (scrollCache != null) {
                 Class<?> scrollCacheCls = scrollCache.getClass();
                 Field scrollBarField = scrollCacheCls.getDeclaredField("scrollBar");
