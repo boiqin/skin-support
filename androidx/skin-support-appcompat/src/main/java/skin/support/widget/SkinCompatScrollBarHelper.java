@@ -5,7 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import skin.support.appcompat.R;
@@ -15,14 +18,13 @@ import skin.support.utils.Slog;
 /**
  * Created by boiqin on 2024/01/02.
  */
-
 public class SkinCompatScrollBarHelper extends SkinCompatHelper {
     private static final String TAG = SkinCompatScrollBarHelper.class.getSimpleName();
 
-    private static Method sVerticalThumbDrawableMethod;
-    private static Method sVerticalTrackDrawableMethod;
-    private static Method sHorizontalThumbDrawableMethod;
-    private static Method sHorizontalTrackDrawableMethod;
+    private static Method sVerticalThumbMethod;
+    private static Method sVerticalTrackMethod;
+    private static Method sHorizontalThumbMethod;
+    private static Method sHorizontalTrackMethod;
 
     private Object mScrollBar;
 
@@ -35,32 +37,26 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
 
     public SkinCompatScrollBarHelper(View view) {
         mView = view;
-        init();
     }
 
     public void loadFromAttributes(AttributeSet attrs, int defStyleAttr) {
         TypedArray a = mView.getContext().obtainStyledAttributes(attrs, R.styleable.SkinCompatScrollBarHelper, defStyleAttr, 0);
         try {
-            if (a.hasValue(R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbVertical)) {
-                mThumbVerticalResId = a.getResourceId(
-                        R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbVertical, INVALID_ID);
-            }
-            if (a.hasValue(R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackVertical)) {
-                mTrackVerticalResId = a.getResourceId(
-                        R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackVertical, INVALID_ID);
-            }
-            if (a.hasValue(R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbHorizontal)) {
-                mThumbHorizontalResId = a.getResourceId(
-                        R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbHorizontal, INVALID_ID);
-            }
-            if (a.hasValue(R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackHorizontal)) {
-                mTrackHorizontalResId = a.getResourceId(
-                        R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackHorizontal, INVALID_ID);
-            }
+            mThumbVerticalResId = initDrawableResId(a, R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbVertical);
+            mTrackVerticalResId = initDrawableResId(a, R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackVertical);
+            mThumbHorizontalResId = initDrawableResId(a, R.styleable.SkinCompatScrollBarHelper_android_scrollbarThumbHorizontal);
+            mTrackHorizontalResId = initDrawableResId(a, R.styleable.SkinCompatScrollBarHelper_android_scrollbarTrackHorizontal);
         } finally {
             a.recycle();
         }
         applySkin();
+    }
+
+    private int initDrawableResId(TypedArray a, int typeValueId) {
+        if (a.hasValue(typeValueId)) {
+            return a.getResourceId(typeValueId, INVALID_ID);
+        }
+        return INVALID_ID;
     }
 
     @Override
@@ -70,40 +66,33 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
         mThumbHorizontalResId = checkResourceId(mThumbHorizontalResId);
         mTrackHorizontalResId = checkResourceId(mTrackHorizontalResId);
         if (mScrollBar == null) {
+            reflectScrollBar();
+        }
+        if (mScrollBar == null) {
             return;
         }
         try {
-            if (sVerticalThumbDrawableMethod != null && mThumbVerticalResId != INVALID_ID) {
-                Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mThumbVerticalResId);
-                if (drawable != null) {
-                    sVerticalThumbDrawableMethod.invoke(mScrollBar, drawable);
-                }
-            }
-            if (sVerticalTrackDrawableMethod != null && mTrackVerticalResId != INVALID_ID) {
-                Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mTrackVerticalResId);
-                if (drawable != null) {
-                    sVerticalTrackDrawableMethod.invoke(mScrollBar, drawable);
-                }
-            }
-            if (sHorizontalThumbDrawableMethod != null && mThumbHorizontalResId != INVALID_ID) {
-                Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mThumbHorizontalResId);
-                if (drawable != null) {
-                    sHorizontalThumbDrawableMethod.invoke(mScrollBar, drawable);
-                }
-            }
-            if (sHorizontalTrackDrawableMethod != null && mTrackHorizontalResId != INVALID_ID) {
-                Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), mTrackHorizontalResId);
-                if (drawable != null) {
-                    sHorizontalTrackDrawableMethod.invoke(mScrollBar, drawable);
-                }
-            }
+            invokeSetDrawableMethod(sVerticalThumbMethod, mThumbVerticalResId);
+            invokeSetDrawableMethod(sVerticalTrackMethod, mTrackVerticalResId);
+            invokeSetDrawableMethod(sHorizontalThumbMethod, mThumbHorizontalResId);
+            invokeSetDrawableMethod(sHorizontalTrackMethod, mTrackHorizontalResId);
         } catch (Exception e) {
-            Slog.i(TAG, e.getMessage());
+            Slog.i(TAG, "invoke setDrawableMethod failed: " + e);
+        }
+    }
+
+    private void invokeSetDrawableMethod(@Nullable Method method, int resId)
+            throws InvocationTargetException, IllegalAccessException {
+        if (method != null && resId != INVALID_ID) {
+            Drawable drawable = SkinCompatVectorResources.getDrawableCompat(mView.getContext(), resId);
+            if (drawable != null) {
+                method.invoke(mScrollBar, drawable);
+            }
         }
     }
 
     // 注意：在target version >= 24失效
-    private void init() {
+    private void reflectScrollBar() {
         try {
             // 滚动条相关属性定义在父类View中
             Field field = View.class.getDeclaredField("mScrollCache");
@@ -114,26 +103,10 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
                 Field scrollBarField = scrollCacheCls.getDeclaredField("scrollBar");
                 mScrollBar = scrollBarField.get(scrollCache);
                 if (mScrollBar != null) {
-                    sVerticalThumbDrawableMethod =
-                            mScrollBar.getClass().getDeclaredMethod("setVerticalThumbDrawable",
-                                    Drawable.class);
-                    sVerticalThumbDrawableMethod.setAccessible(true);
-
-                    sVerticalTrackDrawableMethod =
-                            mScrollBar.getClass().getDeclaredMethod("setVerticalTrackDrawable",
-                                    Drawable.class);
-                    sVerticalTrackDrawableMethod.setAccessible(true);
-
-                    sHorizontalThumbDrawableMethod =
-                            mScrollBar.getClass().getDeclaredMethod("setHorizontalThumbDrawable",
-                                    Drawable.class);
-                    sHorizontalThumbDrawableMethod.setAccessible(true);
-
-                    sHorizontalTrackDrawableMethod =
-                            mScrollBar.getClass().getDeclaredMethod("setHorizontalTrackDrawable",
-                                    Drawable.class);
-                    sHorizontalTrackDrawableMethod.setAccessible(true);
-
+                    sVerticalThumbMethod = reflectDrawableMethod("setVerticalThumbDrawable");
+                    sVerticalTrackMethod = reflectDrawableMethod("setVerticalTrackDrawable");
+                    sHorizontalThumbMethod = reflectDrawableMethod("setHorizontalThumbDrawable");
+                    sHorizontalTrackMethod = reflectDrawableMethod("setHorizontalTrackDrawable");
                 }
             }
         } catch (Exception e) {
@@ -141,4 +114,10 @@ public class SkinCompatScrollBarHelper extends SkinCompatHelper {
         }
     }
 
+    private Method reflectDrawableMethod(String methodName) throws NoSuchMethodException {
+        final Method method =
+                mScrollBar.getClass().getDeclaredMethod(methodName, Drawable.class);
+        method.setAccessible(true);
+        return method;
+    }
 }
