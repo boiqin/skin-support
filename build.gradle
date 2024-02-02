@@ -43,7 +43,7 @@ ext {
 
     glideVersion = "4.12.0"
 
-    skinAndroidXVersion = "4.0.11-20231226-1"
+    skinAndroidXVersion = "4.0.12"
     skinAndroidXSkinGroup = "skin.support"
 
     isUseLocal = false
