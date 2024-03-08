@@ -2,8 +2,6 @@
 
 中文 | [In English](docs/README.md) 
 
-[![](https://jitpack.io/v/LittleFogCat/Android-skin-support.svg)](https://jitpack.io/#LittleFogCat/Android-skin-support)
-
 增加了 [原 Android-skin-support 库](https://github.com/ximsfei/Android-skin-support) 对新版本 AndroidX 的支持。
 
 **导入方式**
@@ -12,11 +10,11 @@
 
 ```gradle
 	dependencies {
-	        implementation 'io.github.boiqin:skin-support:4.0.10'
-	        implementation 'io.github.boiqin:skin-support-appcompat:4.0.10'
-	        implementation 'io.github.boiqin:skin-support-material:4.0.10'
-	        implementation 'io.github.boiqin:skin-support-cardview:4.0.10'
-	        implementation 'io.github.boiqin:skin-support-constraintlayout:4.0.10'
+	        implementation 'io.github.boiqin:skin-support:4.0.12'
+	        implementation 'io.github.boiqin:skin-support-appcompat:4.0.12'
+	        implementation 'io.github.boiqin:skin-support-material:4.0.12'
+	        implementation 'io.github.boiqin:skin-support-cardview:4.0.12'
+	        implementation 'io.github.boiqin:skin-support-constraintlayout:4.0.12'
 	}
 ```
 
